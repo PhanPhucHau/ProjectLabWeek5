@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Candidate</title>
+    <style>
+        /* CSS cho bảng */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+
+        th, td {
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+
+        /* CSS cho phân trang */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .pagination li {
+            margin: 0 5px;
+        }
+
+        .pagination a {
+            padding: 8px 16px;
+            text-decoration: none;
+            background-color: #f1f1f1;
+            color: #007bff;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        .pagination a:hover {
+            background-color: #ddd;
+        }
+
+        .pagination .disabled a {
+            color: #ccc;
+            pointer-events: none;
+        }
+
+        .pagination .active a {
+            background-color: #007bff;
+            color: white;
+        }
+
+        /* Thêm khoảng cách và căn giữa */
+        .container {
+            width: 80%;
+            margin: 20px auto;
+        }
+
+        h2 {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2>Candidate List</h2>
+    <table>
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Address</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="candidate : ${candidates}">
+            <td th:text="${candidate.id}"></td>
+            <td th:text="${candidate.fullName}"></td>
+            <td th:text="${candidate.email}"></td>
+            <td th:text="${candidate.phone}"></td>
+            <td th:text="${candidate.address}"></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <!-- Phân trang -->
+    <nav th:if="${totalPages > 1}" aria-label="Page navigation">
+        <ul class="pagination">
+            <li th:classappend="${currentPage == 1} ? 'disabled'">
+                <a th:href="@{/candidates(size=${pageSize}, page=${currentPage - 1})}" aria-label="Previous">&laquo;</a>
+            </li>
+            <li th:each="pageNumber : ${#numbers.sequence(1, totalPages)}"
+                th:classappend="${pageNumber == currentPage} ? 'active'">
+                <a th:href="@{/candidates(size=${pageSize}, page=${pageNumber})}" th:text="${pageNumber}"></a>
+            </li>
+            <li th:classappend="${currentPage == totalPages} ? 'disabled'">
+                <a th:href="@{/candidates(size=${pageSize}, page=${currentPage + 1})}" aria-label="Next">&raquo;</a>
+            </li>
+        </ul>
+    </nav>
+</div>
+</body>
+</html>
