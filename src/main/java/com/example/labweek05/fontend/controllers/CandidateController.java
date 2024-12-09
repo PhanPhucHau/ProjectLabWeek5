@@ -25,7 +25,7 @@ public class CandidateController {
   //      return "candidates/index";
   //  }
 
-    @GetMapping("")
+    @GetMapping
     public String listCadidateWithPaging(
             @RequestParam("page") Optional<Integer> page,
             @RequestParam("size") Optional<Integer> size,

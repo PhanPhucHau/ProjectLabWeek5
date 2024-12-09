@@ -1,4 +1,4 @@
-package com.example.labweek05.backend.models;
+package com.example.labweek05.backend.ids;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;

@@ -1,5 +1,7 @@
 package com.example.labweek05.backend.models;
 
+import com.example.labweek05.backend.enums.SkillLevel;
+import com.example.labweek05.backend.ids.JobSkillId;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -30,6 +32,6 @@ public class JobSkill {
     private String moreInfos;
 
     @Column(name = "skill_level", nullable = false)
-    private Byte skillLevel;
+    private SkillLevel skillLevel;
 
 }

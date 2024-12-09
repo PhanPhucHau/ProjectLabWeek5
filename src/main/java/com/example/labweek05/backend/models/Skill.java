@@ -1,5 +1,6 @@
 package com.example.labweek05.backend.models;
 
+import com.example.labweek05.backend.enums.SkillsType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -27,6 +28,6 @@ public class Skill {
     private String skillName;
 
     @Column(name = "type")
-    private Byte type;
+    private SkillsType type;
 
 }
