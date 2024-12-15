@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Candidate Skills</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0-alpha1/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .pagination {
+            display: flex;
+            justify-content: center;
+            list-style-type: none;
+        }
+        .pagination li {
+            margin: 0 5px;
+        }
+        .pagination a {
+            padding: 8px 16px;
+            text-decoration: none;
+            background-color: #f1f1f1;
+            color: #007bff;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .pagination .disabled a {
+            color: #ccc;
+            pointer-events: none;
+        }
+        .pagination .active a {
+            background-color: #007bff;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+<div class="container mt-5">
+    <h2>Candidate Skills</h2>
+    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createSkillModal">Create New Candidate Skill</button>
+    <table class="table table-bordered mt-3">
+        <thead>
+        <tr>
+            <th>Candidate</th>
+            <th>Skill</th>
+            <th>MoreInfos</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="cadidateskill : ${candidateSkills}">
+            <td th:text="${cadidateskill.can.fullName}"></td>
+            <td th:text="${cadidateskill.skill.skillName}"></td>
+
+            <td th:text="${cadidateskill.getMoreInfos()}"></td>
+            <td>
+                <a th:href="@{/candidateskills/sendEmail/{candidateId}(candidateId=${cadidateskill.can.id})}" class="btn btn-info btn-sm">Send Email</a>
+            </td>
+            <!-- Send Email button -->
+
+        </tr>
+        </tbody>
+    </table>
+    <div class="pagination">
+        <span th:each="i : ${#numbers.sequence(1, totalPages)}">
+            <a th:href="@{/candidate-skills(page=${i - 1}, size=5)}"
+               th:text="${i}"
+               th:classappend="${i == currentPage + 1} ? 'active'"></a>
+        </span>
+    </div>
+</div>
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0-alpha1/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

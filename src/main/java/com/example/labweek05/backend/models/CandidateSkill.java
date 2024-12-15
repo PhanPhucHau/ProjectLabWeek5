@@ -15,12 +15,12 @@ public class CandidateSkill {
     private CandidateSkillId id;
 
     @MapsId("canId")
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "can_id", nullable = false)
     private com.example.labweek05.backend.models.Candidate can;
 
     @MapsId("skillId")
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "skill_id", nullable = false)
     private com.example.labweek05.backend.models.Skill skill;
 
