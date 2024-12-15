@@ -52,6 +52,11 @@ public class CandidateSkillController {
                     "You have been matched with the following skill: \n\n" +
                     "Thank you!";
 
+            // Lấy accessToken từ OAuth2
+            String accessToken = emailService.getOAuth2AccessToken("google");  // Lấy token từ OAuth2AuthorizedClient
+
+            // Gửi email
+            emailService.sendEmail(candidate.getEmail(), subject, body, accessToken);
         }
         return "redirect:/candidateskills";  // Quay lại trang danh sách CandidateSkills
     }
