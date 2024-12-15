@@ -17,11 +17,6 @@ public class MailConfig {
     @Value("${spring.mail.properties.mail.smtp.oauth2.client-id}")
     private String clientId;
 
-    @Value("${spring.mail.properties.mail.smtp.oauth2.client-secret}")
-    private String clientSecret;
-
-    @Value("${spring.mail.properties.mail.smtp.oauth2.access-token-uri}")
-    private String accessTokenUri;
 
     @Value("${spring.mail.properties.mail.smtp.oauth2.scope}")
     private String scope;
@@ -33,7 +28,6 @@ public class MailConfig {
         mailSender.setPort(587);
 
         mailSender.setUsername(username);
-        mailSender.setPassword(clientSecret);  // Đây là mật khẩu OAuth2, bạn sẽ dùng access token ở đây
 
         Properties props = mailSender.getJavaMailProperties();
         props.put("mail.smtp.auth", "true");
@@ -42,8 +36,6 @@ public class MailConfig {
         // Cấu hình OAuth2 (token sẽ được tự động cung cấp)
         props.put("mail.smtp.user", username);
         props.put("mail.smtp.oauth2.client-id", clientId);
-        props.put("mail.smtp.oauth2.client-secret", clientSecret);
-        props.put("mail.smtp.oauth2.access-token-uri", accessTokenUri);
         props.put("mail.smtp.oauth2.scope", scope);
 
         return mailSender;
